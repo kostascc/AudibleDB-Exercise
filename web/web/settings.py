@@ -29,10 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://audibledb.herokuapp.com',
-    'http://localhost:8000'
-]
+CSRF_TRUSTED_ORIGINS = []
 
 CORS_ORIGIN_ALLOW_ALL = True
 
