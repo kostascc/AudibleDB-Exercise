@@ -468,7 +468,6 @@ body a:hover {
   height: 320px;
   border-bottom: 1px solid #282828;
   position: relative;
-  /*background-image: url({% static 'audiobook_profile.jpg' %});*/
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -489,7 +488,6 @@ body a:hover {
   height: 100%;
   z-index: 0;
   opacity: 0.15;
-  /*background-image: url({% static 'audiobook_profile.jpg' %});*/
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top;
