@@ -1,0 +1,708 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Audible</title>
+    <link
+        href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900'
+        rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
+    <link rel='stylesheet' href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.3.0/nouislider.min.css'>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    
+<style>
+
+.artist__header {
+  background-image: url({% static 'audiobook_profile.jpg' %});
+}
+.artist__header:before {
+    background-image: url({% static 'audiobook_profile.jpg' %});
+}
+
+.form__input {
+  border: none;
+  border-bottom: solid rgb(143, 143, 143) 1px;
+
+  margin-bottom: 30px;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  background: none;
+  color: rgba(255, 255, 255, 0.555);
+
+  height: 35px;
+  width: 300px;
+}
+
+.submit-btn {
+  cursor: pointer;
+
+  border: none;
+  border-radius: 1px;
+
+  box-shadow: 2px 2px 7px #38fd59b8;
+
+  background: #38fd59b8;
+  color: rgba(255, 255, 255, 0.8);
+
+  font-size: 16px;
+    font-weight: 500;   
+
+  width: 120px;
+    height: 42px;
+
+
+  transition: all 0.5s;
+}
+
+.submit-btn:hover {
+  color: rgb(255, 255, 255);
+  background: #38fd59b8;
+  box-shadow: none;
+}
+
+.select-star {
+    color: gold;
+}
+
+</style>
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <section class="header">
+
+        <div class="page-flows">
+
+            <span class="flow">
+                <i onclick="history.back()" class="ion-chevron-left"></i>
+            </span>
+            <!--
+      <span class="flow">
+        <i class="ion-chevron-right disabled"></i>
+      </span>
+      -->
+
+        </div>
+
+        <div class="search">
+            <form action="/" method="POST" autocomplete="off" novalidate>{% csrf_token %}
+
+                <input name="query" id="query" type="text" placeholder="Search" />
+
+            </form>
+
+        </div>
+
+        <div class="user">
+
+
+            <div class="user__info">
+
+                <span class="user__info__img">
+
+                    <img src="{% static 'user_icon.bmp' %}" alt="Profile Picture" class="img-responsive" />
+
+                </span>
+
+                <span class="user__info__name">
+
+                    <span class="first">{{user.firstname}}</span>
+
+                    <span class="last">{{user.lastname}}</span>
+
+                </span>
+
+            </div>
+
+            <div class="user__actions">
+
+                <div class="dropdown">
+                    <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="true">
+                        <i class="ion-chevron-down"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                        <li><a href="/logout/">Log Out</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="content">
+
+        <div class="content__left">
+
+            <section class="navigation">
+
+                <!-- Main -->
+                <div class="navigation__list">
+
+                    <div class="navigation__list__header" role="button" data-toggle="collapse" href="/"
+                        aria-expanded="true" aria-controls="main">
+                        HOME
+                    </div>
+
+                    <div class="collapse in" id="main">
+
+                        <a href="/" class="navigation__list__item">
+                            <i class="ion-ios-browsers"></i>
+                            <span>Browse</span>
+                        </a>
+
+                    </div>
+
+                </div>
+                <!-- / -->
+
+                <!-- Your Music -->
+                <div class="navigation__list">
+
+                    <div class="navigation__list__header" role="button" data-toggle="collapse" href="/"
+                        aria-expanded="true" aria-controls="yourMusic">
+                        YOUR PLAYLIST
+                    </div>
+
+                    <div class="collapse in" id="yourMusic">
+
+                        <a href="/" class="navigation__list__item">
+                            <i class="ion-headphone"></i>
+                            <span>Audiobooks</span>
+                        </a>
+
+                        <a href="/" class="navigation__list__item">
+                            <i class="ion-ios-musical-notes"></i>
+                            <span>Podcasts</span>
+                        </a>
+
+                        <a href="/" class="navigation__list__item">
+                            <i class="ion-person"></i>
+                            <span>Authors</span>
+                        </a>
+
+                        <a href="/" class="navigation__list__item">
+                            <i class="ion-document"></i>
+                            <span>Genres</span>
+                        </a>
+
+                    </div>
+
+                </div>
+                <!-- / -->
+
+                <!-- Playlists -->
+                <div class="navigation__list">
+
+                    <div class="navigation__list__header" role="button" data-toggle="collapse" href="/"
+                        aria-expanded="true" aria-controls="playlists">
+                        Audiobooks
+                    </div>
+                    <!--
+            <div class="collapse in" id="playlists">
+            
+              <a href="#" class="navigation__list__item">
+                <i class="ion-headphone"></i>
+                <span>{{AUDIOBOOK_1}}</span>
+              </a>
+  
+              <a href="#" class="navigation__list__item">
+                  <i class="ion-headphone"></i>
+                  <span>{{AUDIOBOOK_2}}</span>
+                </a>
+  
+                <a href="#" class="navigation__list__item">
+                  <i class="ion-headphone"></i>
+                  <span>{{AUDIOBOOK_3}}</span>
+                </a>
+  
+                <a href="#" class="navigation__list__item">
+                  <i class="ion-headphone"></i>
+                  <span>{{AUDIOBOOK_4}}</span>
+                </a>
+  
+            </div>
+        -->
+
+                </div>
+                <!-- / -->
+
+            </section>
+
+            <!--
+      <section class="playlist">
+  
+        <a href="#">
+  
+          <i class="ion-ios-plus-outline"></i>
+  
+          New Playlist
+  
+        </a>
+  
+      </section>
+    -->
+
+
+            <!--
+      <section class="playing">
+  
+        <div class="playing__art">
+  
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/7022/cputh.jpg" alt="Album Art" />
+  
+        </div>
+  
+        <div class="playing__song">
+  
+          <a class="playing__song__name">Some Type of Love</a>
+  
+          <a class="playing__song__artist">Charlie Puth</a>
+  
+        </div>
+  
+        <div class="playing__add">
+  
+          <i class="ion-checkmark"></i>
+  
+        </div>
+  
+      </section>
+    -->
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="content__middle">
+
+            <div class="artist">
+
+                <div class="artist__header">
+
+                    <div class="artist__info">
+
+                        <div class="profile__img">
+                            <a href="/book/{{book.bookid}}/play/">
+                                <img src="{% static 'play-button.png' %}" alt="" />
+                            </a>
+                        </div>
+
+                        <div class="artist__info__meta">
+
+                            <div class="artist__info__type">AUDIOBOOK</div>
+
+                            <div class="artist__info__name">{{book.title}}</div>
+                            <div class="artist__info__name" style="font-size: 17px;">{{book.authornames}}</div>
+
+                            <!--<div class="artist__info__actions">
+            
+              <button class="button-dark">
+                <i class="ion-ios-play"></i>
+                Play
+              </button>
+              
+              <button class="button-light">Follow</button>
+              
+              <button class="button-light more">
+                <i class="ion-ios-more"></i>
+              </button>
+              
+            </div>-->
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="artist__listeners">
+                        <!--
+          <div class="artist__listeners__count">{{PLAYS_COUNT}}</div>
+          
+          <div class="artist__listeners__label">PLAYS</div>
+        -->
+                    </div>
+
+                    <div class="artist__navigation">
+
+                        <ul class="nav nav-tabs" role="tablist">
+
+                            <li role="presentation" class="active">
+                                <a aria-controls="artist-overview" role="tab" data-toggle="tab">Overview</a>
+                            </li>
+
+                            <!--<li role="presentation">
+              <a href="#artist-about" aria-controls="artist-about" role="tab" data-toggle="tab">About</a>
+            </li>-->
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <div class="artist__content">
+
+                    <div class="tab-content">
+
+                        <!-- Overview -->
+                        <div role="tabpanel" class="tab-pane active" id="artist-overview">
+
+                            <div class="overview">
+
+                                <div class="overview__artist">
+
+
+                                    <!-- Books -->
+                                    <div class="section-title">DESCRIPTION</div>
+
+                                    <div style="margin: 10px; font-size: 17px; color:rgba(255, 255, 255, 0.8)" >
+
+                                    {% if book.overallstars >= 1 %}
+                                    <span class="fa fa-star"></span>
+                                    {% endif %}
+                                    {% if book.overallstars >= 2 %}
+                                        <span class="fa fa-star"></span>
+                                    {% endif %}
+                                    {% if book.overallstars >= 3 %}
+                                        <span class="fa fa-star"></span>
+                                    {% endif %}
+                                    {% if book.overallstars >= 4 %}
+                                        <span class="fa fa-star"></span>
+                                    {% endif %}
+                                    {% if book.overallstars >= 5 %}
+                                        <span class="fa fa-star"></span>
+                                    {% endif %}
+                                    <p style="font-size: 15px; display: inline">{{ book.overallstarsString }}</p>
+
+                                    <p style="font-size: 18px; "><i>{{book.description}}</i></p>
+                                    <p>Narrations: {{book.narratornames}}</p>
+                                    <p>Languages: {{book.languages}}</p>
+                                    <p>Genres: {{book.genres}}</p>
+
+                                    </div>
+
+                                    <div class="tracks">
+
+
+                                        {% for book in books.iterator %}
+
+                                        <!-- Track -->
+                                        <div class="track">
+
+                                            <div class="track__art">
+
+                                                <img src="{% static 'audiobook_profile.jpg' %}"
+                                                    alt="" />
+
+                                            </div>
+
+
+                                            <div class="track__added">
+
+                                                <i class="ion-checkmark-round added"></i>
+
+                                            </div>
+
+                                            <div class="track__added">
+
+                                                <i class="ion-plus not-added"></i>
+
+                                            </div>
+
+                                            <div class="track__title">{{book.title}}</div>
+
+                                            <div class="track__explicit">
+
+                                                <span class="label">{{GENRE1}}</span>
+
+                                            </div>
+
+                                            <div class="track__explicit">
+
+                                                <span class="label">{{GENRE2}}</span>
+
+                                            </div>
+
+                                            <div class="track__plays">{{book.price}} €</div>
+
+                                        </div>
+
+                                        <!-- End Track -->
+                                        {% endfor %}
+
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+                                    <!-- Latest Release-->
+                                    <div class="section-title">OPINIONS</div>
+
+
+                                    <div class="latest-release">
+
+                                        <div class="latest-release__art">
+
+                                            <img src="{% static 'user_icon.bmp' %}" alt="" />
+
+                                        </div>
+
+                                        <div class="latest-release__song">
+
+                                            <div class="latest-release__song__title" style="color:lightgray">I've listened to the book and I think:</div>
+
+                                            <div class="latest-release__song__title" style="width: 100%">
+                                                <form name="review" id="review" method="POST" action="/book/{{book.bookid}}/review/">{% csrf_token %}
+
+                                                    <textarea name="description" style="width: 100%; max-width: 100%; min-width: 100%; height: 50px;" class="form__input" rows="2">{% if myreview is not None %}{{myreview.description}}{% endif %}</textarea>
+                                                    
+                                                    <select form="review" for="review" name="stars" id="stars-select" class="form__input" style="width: 35px;">
+                                                        
+                                                        <option value="0" name="stars" style="background-color:dimgrey"></option>
+
+                                                        {% if myreview is not None and myreview.stars == 1 %}
+                                                        <option value="1" name="stars" style="background-color:dimgrey; font-weight: bold;" selected="selected">1</option>
+                                                        {% else %}
+                                                        <option value="1" name="stars" style="background-color:dimgrey; font-weight: bold;">1</option>
+                                                        {% endif %}
+
+                                                        {% if myreview is not None and myreview.stars == 2 %}
+                                                        <option value="2" name="stars" style="background-color:dimgrey; font-weight: bold;" selected="selected">2</option>
+                                                        {% else %}
+                                                        <option value="2" name="stars" style="background-color:dimgrey; font-weight: bold;">2</option>
+                                                        {% endif %}
+
+                                                        {% if myreview is not None and myreview.stars == 3 %}
+                                                        <option value="3" name="stars" style="background-color:dimgrey; font-weight: bold;" selected="selected">3</option>
+                                                        {% else %}
+                                                        <option value="3" name="stars" style="background-color:dimgrey; font-weight: bold;">3</option>
+                                                        {% endif %}
+
+                                                        {% if myreview is not None and myreview.stars == 4 %}
+                                                        <option value="4" name="stars" style="background-color:dimgrey; font-weight: bold;" selected="selected">4</option>
+                                                        {% else %}
+                                                        <option value="4" name="stars" style="background-color:dimgrey; font-weight: bold;">4</option>
+                                                        {% endif %}
+
+                                                        {% if myreview is not None and myreview.stars == 5 %}
+                                                        <option value="5" name="stars" style="background-color:dimgrey; font-weight: bold;" selected="selected">5</option>
+                                                        {% else %}
+                                                        <option value="5" name="stars" style="background-color:dimgrey; font-weight: bold;">5</option>
+                                                        {% endif %}
+
+                                                    </select>
+
+                                                    <span class="fa fa-star"></span><br>
+                                                    {% if myreview is not None %}
+                                                    <input type="submit" value="Update" class="submit-btn">
+                                                    {% else %}
+                                                    <input type="submit" value="Post" class="submit-btn">
+                                                    {% endif %}
+
+                                                </form>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    {% for review in reviews.iterator %}
+                                    <div class="latest-release">
+
+                                        <div class="latest-release__art">
+
+                                            <img src="{% static 'user_icon.bmp' %}"
+                                                alt="" />
+
+                                        </div>
+
+                                        <div class="latest-release__song">
+
+                                            <div class="latest-release__song__title" style="color:darkgrey">
+                                                {{review.firstname}} thought:</div>
+
+                                            <div class="latest-release__song__title" style="font-style: italic;">
+                                                <p style="display: inline; font-weight: bold; font-size: 20px;">&#8223;
+                                                </p>{{review.description}} <p
+                                                    style="display: inline; font-weight: bold; font-size: 20px;">&#8222;
+                                                </p>
+                                                <br>
+                                                {% if review.stars >= 1 %}
+                                                    <span class="fa fa-star"></span>
+                                                {% endif %}
+                                                {% if review.stars >= 2 %}
+                                                    <span class="fa fa-star"></span>
+                                                {% endif %}
+                                                {% if review.stars >= 3 %}
+                                                    <span class="fa fa-star"></span>
+                                                {% endif %}
+                                                {% if review.stars >= 4 %}
+                                                    <span class="fa fa-star"></span>
+                                                {% endif %}
+                                                {% if review.stars >= 5 %}
+                                                    <span class="fa fa-star"></span>
+                                                {% endif %}
+                                            </div>
+
+                                            <div class="latest-release__song__date">
+
+                                                <span class="day">{{review.datetime}}</span>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    {% endfor %}
+                                    <!-- / -->
+
+
+<br><br><br><br><br>
+
+                                    <!-- / -->
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!-- / -->
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--
+
+
+<section class="current-track">
+
+    <section class="playing">
+
+        <div class="playing__art">
+  
+          <img src="./book_playing_icon.bmp" alt="Album Art" />
+  
+        </div>
+  
+        <div class="playing__song">
+  
+          <a class="playing__song__name">{{CURR_TITLE}}</a>
+  
+          <a class="playing__song__artist">{{CURR_AUTHOR}}</a>
+  
+        </div>
+  
+  
+      </section>
+      
+
+  <div class="current-track__actions">
+  
+    <a class="ion-ios-skipbackward"></a>
+    
+    <a class="ion-ios-play play"></a>
+    
+    <a class="ion-ios-skipforward"></a>
+    
+  </div>
+  
+  <div class="current-track__progress">
+  
+    <div class="current-track__progress__start">0:01</div>
+    
+    <div class="current-track__progress__bar">
+      
+      <div id="song-progress"></div>
+      
+    </div>
+    
+    <div class="current-track__progress__finish">48:23</div>
+    
+  </div>
+
+  
+  <div class="current-track__options">
+  
+    <span class="controls">
+    
+      <a href="#" class="control volume">
+        
+        <i class="ion-volume-high"></i>
+      
+        <div id="song-volume"></div>
+        
+      </a>
+      
+    </span>
+    
+  </div>
+  
+</section>
+
+-->
+
+
+
+
+
+
+
+
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.3.0/nouislider.min.js'></script>
+    <script src="./script.js"></script>
+
+</body>
+
+</html>

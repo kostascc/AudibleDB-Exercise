@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Audible</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'><link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
+<link rel='stylesheet' href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.3.0/nouislider.min.css'><link rel="stylesheet" href="./style.css">
+
+
+<style>
+    html {
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #121212; /* fallback for old browsers */
+  overflow-x: hidden;
+
+  height: 100%;
+
+  /* code to make all text unselectable */
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+/* Disables selector ring */
+body:not(.user-is-tabbing) button:focus,
+body:not(.user-is-tabbing) input:focus,
+body:not(.user-is-tabbing) select:focus,
+body:not(.user-is-tabbing) textarea:focus {
+  outline: none;
+}
+
+/* ########################################################## */
+
+h1 {
+  color: white;
+
+  font-size: 35px;
+  font-weight: 800;
+}
+
+.flex-container {
+  width: 100vw;
+
+  margin-top: 70px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-container {
+  width: 500px;
+  height: 350px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 500px;
+
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  border-radius: 1px;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  background: #1f1f1f;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.199);
+}
+
+.subtitle {
+  font-size: 13px;
+
+  color: rgba(177, 177, 177, 0.3);
+}
+
+input {
+  border: none;
+  border-bottom: solid rgb(143, 143, 143) 1px;
+
+  margin-bottom: 30px;
+
+  font-size: 21px;
+  font-weight: 500;
+
+  background: none;
+  color: rgba(255, 255, 255, 0.555);
+
+  height: 35px;
+  width: 300px;
+}
+
+.submit-btn {
+  cursor: pointer;
+
+  border: none;
+  border-radius: 1px;
+
+  box-shadow: 2px 2px 7px #38d39f70;
+
+  background: #38d39f;
+  color: rgba(255, 255, 255, 0.8);
+
+    font-weight: 500;   
+
+  width: 120px;
+    height: 42px;
+
+
+  transition: all 0.5s;
+}
+
+.submit-btn:hover {
+  color: rgb(255, 255, 255);
+  background: #6fe9c0;
+  box-shadow: none;
+}
+
+</style>
+
+</head>
+<body style="background-image: url({% static 'Audiobook_Background.jpg' %}); background-repeat: no-repeat; background-size: cover;">
+
+
+    <div class="flex-container">
+        <div class="content-container">
+          <div class="form-container">
+            <form action="" method="POST">{% csrf_token %}
+              <h1>
+                Audible
+              </h1>
+              <br>
+              <p style="color:crimson"><b>{{error}}</b></p>
+              <br>
+              <span class="subtitle">USERNAME:</span>
+              <br>
+              <input type="text" name="username" value="">
+              <br>
+              <span class="subtitle">PASSWORD:</span>
+              <br>
+              <input type="password" name="password" value="">
+              <br>
+              <span class="subtitle">NAME:</span>
+              <br>
+              <input type="text" name="firstname" value="">
+              <br>
+              <span class="subtitle">SURNAME:</span>
+              <br>
+              <input type="text" name="lastname" value="">
+              <br><br>
+              <input type="submit" value="Sign Up" class="submit-btn">
+            </form>
+            <div style="color:lightgray; text-align: left; align-content: left; align-items: left; align-self: left;">
+                <a href="/login/" style="color:lightgray; text-align: left; align-content: left;">Sign In Instead?</a>
+                </div>
+          </div>
+        </div>
+      </div>
+
+
+</body>
+</html>
