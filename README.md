@@ -2,7 +2,7 @@
 Visit: [audibledb.herokuapp.com](https://audibledb.herokuapp.com/)
 
 ### Instructions for Installation on Heroku (Recommended):
-Note: the django MySQL dump should be used for constructing the database.
+Note: the django MySQL dump should be used for constructing the database, which can be found in `db/django-dump.sql`.
 
 Use `git clone https://github.com/kostascc/AudibleDB-Exercise audible` to download a copy of this app, and open the root directory.
 
@@ -23,7 +23,7 @@ git push heroku main
 ```
 
 ### Instructions for Installation on Linux/Windows:
-Note: the django MySQL dump should be used for constructing the database.
+Note: the django MySQL dump should be used for constructing the database, which can be found in `db/django-dump.sql`.
 
 Install Django:
 ```
