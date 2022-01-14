@@ -1,2 +1,4 @@
 
 staticfiles/
+
+web/__pycache__/
