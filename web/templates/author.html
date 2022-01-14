@@ -156,43 +156,25 @@
   
           <!-- Playlists -->
           <div class="navigation__list">
-  
-            <div class="navigation__list__header" 
-                 role="button" 
-                 data-toggle="collapse" 
-                 href="/" 
-                 aria-expanded="true" 
-                 aria-controls="playlists">
-              Audiobooks
+
+            <div class="navigation__list__header" role="button" data-toggle="collapse" href="/"
+                aria-expanded="true" aria-controls="playlists">
+                Audiobooks
             </div>
-            <!--
-            <div class="collapse in" id="playlists">
             
-              <a href="#" class="navigation__list__item">
-                <i class="ion-headphone"></i>
-                <span>{{AUDIOBOOK_1}}</span>
-              </a>
-  
-              <a href="#" class="navigation__list__item">
-                  <i class="ion-headphone"></i>
-                  <span>{{AUDIOBOOK_2}}</span>
+            <div class="collapse in" id="playlists">
+                
+                {% for buy in buys.iterator %}
+                <a href="/book/{{buy.bookid.bookid}}/" class="navigation__list__item">
+                    <i class="ion-headphone"></i>
+                    <span>{{buy.bookid.title}}</span>
                 </a>
-  
-                <a href="#" class="navigation__list__item">
-                  <i class="ion-headphone"></i>
-                  <span>{{AUDIOBOOK_3}}</span>
-                </a>
-  
-                <a href="#" class="navigation__list__item">
-                  <i class="ion-headphone"></i>
-                  <span>{{AUDIOBOOK_4}}</span>
-                </a>
-  
+                {% endfor %}
+
             </div>
-        -->
-  
-          </div>
-          <!-- / -->
+
+        </div>
+        <!-- / -->
   
         </section>
       

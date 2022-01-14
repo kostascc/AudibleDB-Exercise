@@ -1,0 +1,351 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Audible</title>
+    <link
+        href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900'
+        rel='stylesheet' type='text/css'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
+    <link rel='stylesheet' href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.3.0/nouislider.min.css'>
+    <link rel="stylesheet" href="./style.css">
+
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #121212;
+            /* fallback for old browsers */
+            overflow-x: hidden;
+
+            height: 100%;
+
+            /* code to make all text unselectable */
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+        }
+
+        /* Disables selector ring */
+        body:not(.user-is-tabbing) button:focus,
+        body:not(.user-is-tabbing) input:focus,
+        body:not(.user-is-tabbing) select:focus,
+        body:not(.user-is-tabbing) textarea:focus {
+            outline: none;
+        }
+
+        /* ########################################################## */
+
+        h1 {
+            color: white;
+
+            font-size: 35px;
+            font-weight: 800;
+        }
+
+        .flex-container {
+            width: 100vw;
+
+            margin-top: 70px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-container {
+            width: 500px;
+            height: 350px;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 500px;
+
+            margin-top: 5px;
+            margin-bottom: 5px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+
+            border-radius: 1px;
+
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+            background: #1f1f1f;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.199);
+        }
+
+        .subtitle {
+            font-size: 13px;
+
+            color: #b1b1b14d;
+        }
+
+        input {
+            border: none;
+            border-bottom: solid rgb(143, 143, 143) 1px;
+
+            margin-bottom: 30px;
+
+            font-size: 21px;
+            font-weight: 500;
+
+            background: none;
+            color: rgba(255, 255, 255, 0.555);
+
+            height: 35px;
+            width: 300px;
+        }
+
+        .black_input {
+            border: none;
+            border-bottom: solid rgb(143, 143, 143) 1px;
+
+            margin-bottom: 30px;
+
+            font-size: 21px;
+            font-weight: 500;
+
+            background: none;
+            color: rgba(255, 255, 255, 0.555);
+
+            height: 35px;
+            width: 300px;
+        }
+
+        .submit-btn {
+            cursor: pointer;
+
+            border: none;
+            border-radius: 1px;
+
+            box-shadow: 2px 2px 7px #38d39f70;
+
+            background: #38d39f;
+            color: rgba(255, 255, 255, 0.8);
+
+            font-weight: 500;
+
+            width: 140px;
+            height: 42px;
+
+
+            transition: all 0.5s;
+        }
+
+        .submit-btn:hover {
+            color: rgb(255, 255, 255);
+            background: #6fe9c0;
+            box-shadow: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <div class="flex-container">
+        <div class="content-container">
+            <div class="form-container">
+                <p style="color:rgb(20, 220, 127)"><b>{{success}}</b></p>
+                <p style="color:crimson"><b>{{error}}</b></p>
+                <br>
+                {% if bookid is None %}
+                <form action="" id="addBookForm" method="POST">{% csrf_token %}
+                    <h1>
+                        Create Book
+                    </h1>
+                    <br>
+                    <br>
+                    <span class="subtitle">TITLE:</span>
+                    <br>
+                    <input type="text" name="title" value="">
+
+                    <br>
+                    <span class="subtitle">DESCRIPTION:</span>
+                    <br>
+                    <input type="text" name="description" value="">
+
+                    <br>
+                    <span class="subtitle">LENGTH (SECONDS):</span>
+                    <br>
+                    <input type="number" step="1" name="length" value="">
+
+                    <br>
+                    <span class="subtitle">PRICE (€):</span>
+                    <br>
+                    <input type="number" step="0.01" name="price" value="">
+
+
+                    <br>
+                    <span class="subtitle">RELEASE DATE:</span>
+                    <br>
+                    <input type="text" placeholder="yyyy-mm-dd" name="releasedate" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" required />
+                    
+                    <br><br>
+                    <input type="submit" value="Create" class="submit-btn">
+                </form>
+                {% else %}
+
+                {% if show == "addAuthor" %}
+
+                <form action="/book/add/{{bookid}}/" id="addAuthor" method="POST">{% csrf_token %}
+                    <h1>
+                        Authors:
+                    </h1>
+
+                    <br>
+                    <span class="subtitle">SELECT:</span>
+                    <br>
+                    <select form="addAuthor" for="addAuthor" name="author" class="form__input black_input"
+                        style="width: 100%;">
+
+                        {% for author in authors.iterator %}
+                        <option value="{{author.authorid}}" style="background-color:dimgrey">{{author.name}}</option>
+                        {% endfor %}
+                    </select>
+
+                    <input type="submit" value="Set Author" class="submit-btn">
+
+                </form>
+
+                {% elif show == "addNarrator" %}
+                <form action="/book/add/{{bookid}}/" id="addNarrator" method="POST">{% csrf_token %}
+                    <h1>
+                        Narrators:
+                    </h1>
+
+                    <br>
+                    <span class="subtitle">SELECT:</span>
+                    <br>
+                    <select form="addNarrator" for="addNarrator" name="narrator" class="form__input black_input"
+                        style="width: 100%;">
+
+                        {% for narrator in narrators.iterator %}
+                        <option value="{{narrator.narratorid}}" style="background-color:dimgrey">{{narrator.name}}</option>
+                        {% endfor %}
+                    </select>
+
+                    <input type="submit" value="Set Narrator" class="submit-btn">
+
+                </form>
+                {% elif show == "addLanguage" %}
+                <form action="/book/add/{{bookid}}/" id="addLanguage" method="POST">{% csrf_token %}
+                    <h1>
+                        Languages:
+                    </h1>
+
+                    <br>
+                    <span class="subtitle">SELECT:</span>
+                    <br>
+                    <select form="addLanguage" for="addLanguage" name="language" class="form__input black_input"
+                        style="width: 100%;">
+
+                        {% for language in languages %}
+                        <option value="{{language}}" style="background-color:dimgrey">{{language}}</option>
+                        {% endfor %}
+                    </select>
+
+                    <input type="submit" value="Set Language" class="submit-btn">
+
+                </form>
+                {% elif show == "addGenre" %}
+                <form action="/book/add/{{bookid}}/" id="addGenre" method="POST">{% csrf_token %}
+                    <h1>
+                        Genres:
+                    </h1>
+
+                    <br>
+                    <span class="subtitle">SELECT:</span>
+                    <br>
+                    <select form="addGenre" for="addGenre" name="genre" class="form__input black_input"
+                        style="width: 100%;">
+
+                        {% for genre in genres %}
+                        <option value="{{genre}}" style="background-color:dimgrey">{{genre}}</option>
+                        {% endfor %}
+                    </select>
+
+                    <input type="submit" value="Set Genre" class="submit-btn">
+
+                </form>
+                {% else %}
+                <form action="/book/add/{{bookid}}/" method="POST">{% csrf_token %}
+                    <input type="hidden" name="show" value="addNarrator" />
+                    <input type="submit" value="Set Narrator" class="submit-btn">
+                </form>
+
+                <form action="/book/add/{{bookid}}/" method="POST">{% csrf_token %}
+                    <input type="hidden" name="show" value="addAuthor" />
+                    <input type="submit" value="Set Author" class="submit-btn">
+                </form>
+
+                <form action="/book/add/{{bookid}}/" method="POST">{% csrf_token %}
+                    <input type="hidden" name="show" value="addGenre" />
+                    <input type="submit" value="Set Genre" class="submit-btn">
+                </form>
+
+                <form action="/book/add/{{bookid}}/" method="POST">{% csrf_token %}
+                    <input type="hidden" name="show" value="addLanguage" />
+                    <input type="submit" value="Set Language" class="submit-btn">
+                </form>
+                {% endif %}
+
+                {% endif %}
+
+                {% if show is None %}
+
+                <div
+                    style="color:lightgray; text-align: left; align-content: left; align-items: left; align-self: left;">
+                    <a href="/" style="color:lightgray; text-align: left; align-content: left;">Home</a>
+                </div>
+
+                {% else %}
+
+                <div
+                    style="color:lightgray; text-align: left; align-content: left; align-items: left; align-self: left;">
+                    <a href="/book/add/{{bookid}}/"
+                        style="color:lightgray; text-align: left; align-content: left;">Back</a>
+                </div>
+
+                {% endif %}
+
+                {% if bookid is not None %}
+                <div
+                    style="color:lightgray; text-align: left; align-content: left; align-items: left; align-self: left;">
+                    <a href="/book/{{bookid}}/" style="color:lightgray; text-align: left; align-content: left;">View
+                        Book</a>
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>

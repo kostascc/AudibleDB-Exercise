@@ -149,31 +149,17 @@
                         aria-expanded="true" aria-controls="playlists">
                         Audiobooks
                     </div>
-                    <!--
-            <div class="collapse in" id="playlists">
-            
-              <a href="#" class="navigation__list__item">
-                <i class="ion-headphone"></i>
-                <span>{{AUDIOBOOK_1}}</span>
-              </a>
-  
-              <a href="#" class="navigation__list__item">
-                  <i class="ion-headphone"></i>
-                  <span>{{AUDIOBOOK_2}}</span>
-                </a>
-  
-                <a href="#" class="navigation__list__item">
-                  <i class="ion-headphone"></i>
-                  <span>{{AUDIOBOOK_3}}</span>
-                </a>
-  
-                <a href="#" class="navigation__list__item">
-                  <i class="ion-headphone"></i>
-                  <span>{{AUDIOBOOK_4}}</span>
-                </a>
-  
-            </div>
-        -->
+
+                    <div class="collapse in" id="playlists">
+
+                        {% for buy in buys.iterator %}
+                        <a href="/book/{{buy.bookid.bookid}}/" class="navigation__list__item">
+                            <i class="ion-headphone"></i>
+                            <span>{{buy.bookid.title}}</span>
+                        </a>
+                        {% endfor %}
+
+                    </div>
 
                 </div>
                 <!-- / -->
@@ -369,9 +355,9 @@
                                             -->
 
                                             <div class="track__added">
-
-                                                <i class="ion-plus not-added"></i>
-
+                                                <a href="/book/{{book.bookid}}/buy/">
+                                                    <i class="ion-plus not-added"></i>
+                                                </a>
                                             </div>
 
                                             <div class="track__title featured">
@@ -411,6 +397,8 @@
                                 {% else %}
 
                                 <div class="overview__related">
+
+
 
                                     <div class="section-title">GENRES</div>
 
@@ -479,8 +467,8 @@
 
 
 
-
                                 <div class="overview__related">
+
 
                                     <div class="section-title">LANGUAGES</div>
 
@@ -537,9 +525,21 @@
 
 
 
-
-
-
+                                <div class="overview__related">
+                                    <div class="section-title">ALL</div>
+                                    <div class="related-artists">
+                                        <form action="/" method="POST" id="form_all">{% csrf_token %}
+                                            <input type="hidden" value="" name="query" />
+                                        </form>
+                                        <a href="/" class="related-artist"
+                                            onclick="document.getElementById('form_all').submit();return false;">
+                                            <span class="related-artist__img">
+                                                <img src="{% static 'headphones.jpg' %}" alt="" />
+                                            </span>
+                                            <span class="related-artist__name">All Audiobooks and Authors</span>
+                                        </a>
+                                    </div>
+                                </div>
 
 
 

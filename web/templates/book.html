@@ -201,41 +201,27 @@
                 </div>
                 <!-- / -->
 
-                <!-- Playlists -->
-                <div class="navigation__list">
+               <!-- Playlists -->
+               <div class="navigation__list">
 
-                    <div class="navigation__list__header" role="button" data-toggle="collapse" href="/"
-                        aria-expanded="true" aria-controls="playlists">
-                        Audiobooks
-                    </div>
-                    <!--
-            <div class="collapse in" id="playlists">
-            
-              <a href="#" class="navigation__list__item">
-                <i class="ion-headphone"></i>
-                <span>{{AUDIOBOOK_1}}</span>
-              </a>
-  
-              <a href="#" class="navigation__list__item">
-                  <i class="ion-headphone"></i>
-                  <span>{{AUDIOBOOK_2}}</span>
-                </a>
-  
-                <a href="#" class="navigation__list__item">
-                  <i class="ion-headphone"></i>
-                  <span>{{AUDIOBOOK_3}}</span>
-                </a>
-  
-                <a href="#" class="navigation__list__item">
-                  <i class="ion-headphone"></i>
-                  <span>{{AUDIOBOOK_4}}</span>
-                </a>
-  
-            </div>
-        -->
-
+                <div class="navigation__list__header" role="button" data-toggle="collapse" href="/"
+                    aria-expanded="true" aria-controls="playlists">
+                    Audiobooks
                 </div>
-                <!-- / -->
+                
+                <div class="collapse in" id="playlists">
+                    
+                    {% for buy in buys.iterator %}
+                    <a href="/book/{{buy.bookid.bookid}}/" class="navigation__list__item">
+                        <i class="ion-headphone"></i>
+                        <span>{{buy.bookid.title}}</span>
+                    </a>
+                    {% endfor %}
+    
+                </div>
+
+            </div>
+            <!-- / -->
 
             </section>
 
@@ -376,7 +362,11 @@
                                     <!-- Books -->
                                     <div class="section-title">DESCRIPTION</div>
 
-                                    <div style="margin: 10px; font-size: 17px; color:rgba(255, 255, 255, 0.8)" >
+                                    <div style="margin: 10px; width: 50%; font-size: 17px; color:rgba(255, 255, 255, 0.8)" >
+
+                                        <p>
+                                            {{bookobj.description}}
+                                        </p>
 
                                     {% if book.overallstars >= 1 %}
                                     <span class="fa fa-star"></span>
