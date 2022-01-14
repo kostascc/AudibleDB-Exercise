@@ -10,7 +10,7 @@ Run the commands below on Heroku CLI to create and publish the app.
 heroku create audible
 
 # Set ENV
-heroku config:set -a audible DEBUG=false
+heroku config:set -a audible DEBUG=<[True|False]>
 heroku config:set -a audible DATABASE_NAME=<name of your database>
 heroku config:set -a audible DATABASE_USER=<database user>
 heroku config:set -a audible DATABASE_PASS=<database password>
@@ -30,7 +30,7 @@ pip install Django
 
 Initialize the environment with a MySQL database:
 ```
-export DEBUG=<[true|false]>
+export DEBUG=<[True|False]>
 export DATABASE_USER=<database username>
 export DATABASE_PASS=<database password>
 export DATABASE_HOST=<mysql host, without any protocols (e.g. mysql://) or ports (:3306)>
